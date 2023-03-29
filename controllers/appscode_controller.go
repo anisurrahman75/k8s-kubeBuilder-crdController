@@ -77,11 +77,11 @@ func (r *AppsCodeReconciler) Reconcile(ctx context.Context, req ctrl.Request) (c
 	// appsCodeInstance have all data of AppsCode Resources
 	var appsCodeInstance mycrdv1alpha1.AppsCode
 	if err := r.Get(ctx, req.NamespacedName, &appsCodeInstance); err != nil {
-		log.Error(err, "Unable to Fetch appsCodeInstance")
+		log.Info("Unable to Fetch appsCodeInstance")
 		// we'll ignore not-found errors, since they can't be fixed by an immediate
 		// requeue (we'll need to wait for a new notification), and we can get them
 		// on deleted requests.
-		return ctrl.Result{}, client.IgnoreNotFound(err)
+		return ctrl.Result{}, nil
 	}
 	var deploymentsInstance appsv1.Deployment
 
