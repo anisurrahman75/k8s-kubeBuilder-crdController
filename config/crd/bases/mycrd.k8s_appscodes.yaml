@@ -15,7 +15,16 @@ spec:
     singular: appscode
   scope: Namespaced
   versions:
-  - name: v1alpha1
+  - additionalPrinterColumns:
+    - description: Avaliable Pods
+      jsonPath: .status.availableReplicas
+      name: AvailableReplicas
+      type: integer
+    - description: Age of Objects
+      jsonPath: .metadata.creationTimestamp
+      name: age
+      type: date
+    name: v1alpha1
     schema:
       openAPIV3Schema:
         description: AppsCode is the Schema for the appscodes API

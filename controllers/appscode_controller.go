@@ -93,6 +93,7 @@ func (r *AppsCodeReconciler) Reconcile(ctx context.Context, req ctrl.Request) (c
 				log.Error(err, "Error Creating  %s Deployments", appsCodeInstance.Name)
 			} else {
 				fmt.Printf("%s Deployments Created...++++++\n", appsCodeInstance.Name)
+
 			}
 		}
 	} else {
@@ -109,6 +110,7 @@ func (r *AppsCodeReconciler) Reconcile(ctx context.Context, req ctrl.Request) (c
 				log.Error(err, "failed to Deployment update replica count")
 				return ctrl.Result{}, err
 			}
+
 		}
 	}
 
@@ -124,6 +126,20 @@ func (r *AppsCodeReconciler) Reconcile(ctx context.Context, req ctrl.Request) (c
 				fmt.Printf("%s Services Created...+++++\n", appsCodeInstance.Name)
 			}
 		}
+	}
+	expectedReplicas := int32(1)
+	if appsCodeInstance.Spec.Replicas != nil {
+		expectedReplicas = *appsCodeInstance.Spec.Replicas
+	}
+	if appsCodeInstance.Status.AvailableReplicas != expectedReplicas {
+		log.Info("updating AvailableReplica", "old_count", appsCodeInstance.Status.AvailableReplicas, "new_count", expectedReplicas)
+		appsCodeInstance.Status.AvailableReplicas = expectedReplicas
+		if err := r.Status().Update(ctx, &appsCodeInstance); err != nil {
+			fmt.Println("Failed")
+			log.Error(err, "failed to AppsCode Status update AvailableReplicas")
+			return ctrl.Result{}, err
+		}
+
 	}
 	return ctrl.Result{}, nil
 }
