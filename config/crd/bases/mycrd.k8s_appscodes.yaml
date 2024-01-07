@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.13.0
   name: appscodes.mycrd.k8s
 spec:
   group: mycrd.k8s
@@ -15,16 +14,7 @@ spec:
     singular: appscode
   scope: Namespaced
   versions:
-  - additionalPrinterColumns:
-    - description: Avaliable Pods
-      jsonPath: .status.availableReplicas
-      name: AvailableReplicas
-      type: integer
-    - description: Age of Objects
-      jsonPath: .metadata.creationTimestamp
-      name: age
-      type: date
-    name: v1alpha1
+  - name: v1alpha1
     schema:
       openAPIV3Schema:
         description: AppsCode is the Schema for the appscodes API
