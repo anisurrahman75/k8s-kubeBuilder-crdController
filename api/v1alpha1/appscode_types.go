@@ -1,5 +1,5 @@
 /*
-Copyright 2023.
+Copyright 2024.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -45,8 +45,6 @@ type AppsCodeStatus struct {
 
 //+kubebuilder:object:root=true
 //+kubebuilder:subresource:status
-//+kubebuilder:printcolumn:name="AvailableReplicas",priority=0,type="integer",JSONPath=".status.availableReplicas",description="Avaliable Pods"
-//+kubebuilder:printcolumn:name="age",priority=0,type="date",JSONPath=".metadata.creationTimestamp",description="Age of Objects"
 
 // AppsCode is the Schema for the appscodes API
 type AppsCode struct {

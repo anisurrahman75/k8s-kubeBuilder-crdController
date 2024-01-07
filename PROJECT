@@ -4,9 +4,9 @@
 # More info: https://book.kubebuilder.io/reference/project-config.html
 domain: k8s
 layout:
-- go.kubebuilder.io/v3
+- go.kubebuilder.io/v4
 projectName: k8s-kubebuilder
-repo: github.com/anisurrahman75/k8s-kubeBuilder
+repo: kubeBuilder
 resources:
 - api:
     crdVersion: v1
@@ -15,6 +15,10 @@ resources:
   domain: k8s
   group: mycrd
   kind: AppsCode
-  path: github.com/anisurrahman75/k8s-kubeBuilder/api/v1alpha1
+  path: kubeBuilder/api/v1alpha1
   version: v1alpha1
+  webhooks:
+    defaulting: true
+    validation: true
+    webhookVersion: v1
 version: "3"
